@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>LabelZhou</Authors>
+    <Description>recurring job extensions for hangfire dashboard.</Description>
+    <RepositoryUrl>https://github.com/LabelZhou/Hangfire.Dashboard.RecurringJobExtensions</RepositoryUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/LabelZhou/Hangfire.Dashboard.RecurringJobExtensions/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>Hangfire,Dashboard,Recurring Job,Recurring</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire.Core" Version="1.6.21" />
+  </ItemGroup>
+
+</Project>
