@@ -6,7 +6,7 @@
 
 
 ## Installation
-NuGet Package Console
+NuGet Package Console:
 ```
 PM> Install-Package Hangfire.Dashboard.RecurringJobExtensions
 ```
@@ -27,7 +27,7 @@ Otherwise:
 ```c#
 GlobalConfiguration.Configuration
     .UseSqlServerStorage("connectionSting")
-    .UseConsole();
+    .UseDashboardRecurringJobExtensions();
 ```
 
 ## Usage
