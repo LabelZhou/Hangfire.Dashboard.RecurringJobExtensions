@@ -10,10 +10,13 @@
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Version>1.0.1</Version>
+    <PackageReleaseNotes>v1.0.1
+Add missing static files</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\*" />
+    <EmbeddedResource Include="Resource\*" />
   </ItemGroup>
 
   <ItemGroup>
