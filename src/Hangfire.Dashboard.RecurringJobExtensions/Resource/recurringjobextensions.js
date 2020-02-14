@@ -13,7 +13,7 @@
 
             var recurring_templete = "{\"JobId\":\"\",\"Type\":\"\",\"MethodName\":\"\",\"Cron\":\"" + config.DefaultCron + "\",\"Queue\":\"" + config.DefaultQueue + "\",\"TimeZone\":\"" + config.DefaultTimeZone + "\"}";
 
-            var button = '<button class="btn btn-sm btn-primary"  id="addRecurringJob"  data-toggle="modal" data-target="#recurringJobModal">' +
+            var button = '<button class="btn btn-sm btn-primary pull-right"  id="addRecurringJob"  data-toggle="modal" data-target="#recurringJobModal">' +
                 '<span class="glyphicon glyphicon-plus"></span>' +
                 config.AddRecurringJobButtonName +
                 '</button>';
