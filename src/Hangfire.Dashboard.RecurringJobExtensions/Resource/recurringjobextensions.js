@@ -10,11 +10,7 @@
             if (!config) return;
             if (!config.NeedAddRecurringJobButton) return;
 
-
-            var recurring_templete = "{\"JobId\":\"\",\"Type\":\"\",\"MethodName\":\"\",\"Cron\":\"" + config.DefaultCron + "\",\"Queue\":\"" + config.DefaultQueue + "\",\"TimeZone\":\"" + config.DefaultTimeZone + "\"}";
-
             var button = '<button class="btn btn-sm btn-primary pull-right"  id="addRecurringJob"  data-toggle="modal" data-target="#recurringJobModal">' +
-                '<span class="glyphicon glyphicon-plus"></span>' +
                 config.AddRecurringJobButtonName +
                 '</button>';
             var divModel =
@@ -53,6 +49,19 @@
             }
 
             $('#addRecurringJob').click(function () {
+
+                var recurring_templete = "{\"JobId\":\"\",\"Type\":\"\",\"MethodName\":\"\",\"Cron\":\"" + config.DefaultCron + "\",\"Queue\":\"" + config.DefaultQueue + "\",\"TimeZone\":\"" + config.DefaultTimeZone + "\"}";
+
+                if ($('input[name=\"jobs[]\"]:checked')[0]) {
+                    var jobId = $('input[name=\"jobs[]\"]:checked')[0].value.trim();
+                    var jobType = $('input[name=\"jobs[]\"]:checked').parents('tr:eq(0)').find('td:eq(4)').text().trim();
+                    var jobMethod = $('input[name=\"jobs[]\"]:checked').parents('tr:eq(0)').find('td:eq(4)').text().split('.')[1].trim();
+                    var jobCron = $('input[name=\"jobs[]\"]:checked').parents('tr:eq(0)').find('td:eq(2)').text().trim();
+                    recurring_templete = "{\"JobId\":\"" + jobId + "\",\"Type\":\"" + jobType + "\",\"MethodName\":\"" + jobMethod + "\",\"Cron\":\"" + jobCron + "\",\"Queue\":\"" + config.DefaultQueue + "\",\"TimeZone\":\"" + config.DefaultTimeZone + "\",\"AssemblyName\":\"" + config.AssemblyName + "\"}";
+                }
+                
+                
+
                 jsonEditor.setText(recurring_templete);
                 jsonEditor.format();
             });

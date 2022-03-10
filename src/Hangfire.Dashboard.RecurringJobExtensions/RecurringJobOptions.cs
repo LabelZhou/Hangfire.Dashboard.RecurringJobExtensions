@@ -12,8 +12,10 @@ namespace Hangfire.Dashboard.RecurringJobExtensions
         public string DefaultCron { get; set; } = Cron.Minutely();
         public string DefaultQueue { get; set; } = States.EnqueuedState.DefaultQueue;
 
-        public string AddRecurringJobButtonName { get; set; } = "Add Recurring Job";
+        public string AddRecurringJobButtonName { get; set; } = "Add/Update Recurring Job";
         public string CloseButtonName { get; set; } = "Close";
         public string SumbitButtonName { get; set; } = "Submit";
+
+        public string AssemblyName { get; set; }
     }
 }

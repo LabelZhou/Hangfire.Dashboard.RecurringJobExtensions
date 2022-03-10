@@ -19,6 +19,7 @@ namespace Hangfire.Dashboard.RecurringJobExtensions.Dashboard
             var sb = new StringBuilder();
 
             sb.Append("(function(hangfire){")
+
                 .Append("hangfire.recurringJobExtensionsConfiguration=hangfire.recurringJobExtensions || {};")
                 .Append($"hangfire.recurringJobExtensionsConfiguration.DefaultTimeZone='{_options.DefaultTimeZone}';")
                 .AppendFormat($"hangfire.recurringJobExtensionsConfiguration.AddRecurringJobUrl = '{context.Request.PathBase}{_options.ApiPath}';")
@@ -27,6 +28,7 @@ namespace Hangfire.Dashboard.RecurringJobExtensions.Dashboard
                 .Append($@"hangfire.recurringJobExtensionsConfiguration.AddRecurringJobButtonName='{_options.AddRecurringJobButtonName}';")
                 .Append($@"hangfire.recurringJobExtensionsConfiguration.SumbitButtonName='{_options.SumbitButtonName}';")
                 .Append($@"hangfire.recurringJobExtensionsConfiguration.CloseButtonName='{_options.CloseButtonName}';")
+                .Append($@"hangfire.recurringJobExtensionsConfiguration.AssemblyName='{_options.AssemblyName}';")
                 .AppendFormat("hangfire.recurringJobExtensionsConfiguration.NeedAddRecurringJobButton = location.href.substring(location.href.length-'{0}'.length)=='{0}';", _options.RecurringEndPath)
                 .Append("})(window.Hangfire=window.Hangfire||{});")
             ;

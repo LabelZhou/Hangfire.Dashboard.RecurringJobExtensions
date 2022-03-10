@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using Hangfire.Annotations;
 using Hangfire.Dashboard.RecurringJobExtensions.Server;
+using Hangfire.Dashboard.RecurringJobExtensions.Support;
 
 namespace Hangfire.Dashboard.RecurringJobExtensions.Dashboard
 {
@@ -37,20 +36,20 @@ namespace Hangfire.Dashboard.RecurringJobExtensions.Dashboard
                 || string.IsNullOrWhiteSpace(options.TimeZone))
             {
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                await context.Response.WriteAsync("parameters is not null or empty");
+                await context.Response.WriteAsync("Parameters are null or empty");
                 return;
             }
 
-
-
-            Type jobType = Type.GetType(options.Type, false, true);
+            Type jobType = GetJobType(options);
             if (jobType == null)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 await context.Response.WriteAsync($"{options.Type} error");
                 return;
             }
+
             var method = jobType.GetTypeInfo().GetDeclaredMethod(options.MethodName);
+
             if (method == null)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -70,7 +69,38 @@ namespace Hangfire.Dashboard.RecurringJobExtensions.Dashboard
             }
 
             _recurringJobRegistry.Register(options.JobId, method, options.Cron, timeZoneInfo, options.Queue);
-            await context.Response.WriteAsync("添加成功");
+            await context.Response.WriteAsync("Successfully Added/Updated");
+        }
+
+        private Type GetJobType(RecurringJobInfo options)
+        {
+            try
+            {
+                Type jobType = null;
+                var assembly = AppDomainHelper.GetAssemblyByName(options.AssemblyName);
+                if (assembly == null)
+                {
+                    jobType = Type.GetType(options.Type, false, true);
+                }
+                else
+                {
+                    var className = options.Type.Split('.')[0];
+                    var methodName = options.Type.Split('.')[1];
+                    foreach (var item in assembly.GetTypes())
+                    {
+                        if (item.IsClass && item.Name == className)
+                        {
+                            jobType = item;
+                            break;
+                        }
+                    }
+                }
+                return jobType;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private async Task<RecurringJobInfo> GetRecurringJobInfoAsync(DashboardContext _context)
