@@ -39,5 +39,7 @@ namespace Hangfire.Dashboard.RecurringJobExtensions
         /// gets or sets queue
         /// </summary>
         public string Queue { get; set; }
+
+        public string AssemblyName { get; set; }
     }
 }
